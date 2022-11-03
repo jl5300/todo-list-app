@@ -1,0 +1,69 @@
+.todo-list li {
+	list-style-type: none;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	border: 2px solid black;
+	border-radius: 5px;
+	display: flex;
+	height: auto;
+	background-color: navajowhite;
+}
+
+.todo-list .text-fields {
+	width: 82%;
+}
+
+.todo-list .buttons {
+	width: 18%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.todo-list .task-name {
+	padding: 7px 0px 0px 5px;
+}
+
+.todo-list hr.horizontal {
+	border-width: 1px 0 0 0;
+	border-color: black;
+	width: 100%;
+}
+
+.todo-list .vertical-line {
+	width: 0.5px;
+	background-color: black;
+	height: auto;
+}
+
+.todo-list .task-desc input {
+	border: none;
+	background-color: transparent;
+	margin: 2px 0px;
+	padding: 0px 0px 5px 5px;
+	width: 98%;
+}
+
+.todo-list .task-desc input:placeholder-shown {
+	font-style: italic;
+}
+
+.todo-list button {
+	background-position: center;
+	border-radius: 100%;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+}
+
+.todo-list .check-button {
+	background-image: url(../images/check_icon.jpg);
+	background-size: 21px;
+	background-repeat: no-repeat;
+	background-color: white;
+}
+
+.todo-list .delete-button {
+	background-image: url(../images/trash_icon.jpg);
+	background-size: cover;
+}
