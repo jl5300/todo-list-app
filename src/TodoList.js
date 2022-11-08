@@ -6,10 +6,13 @@ export default function TodoList(props) {
 		const task = entry.task;
 
 		return (
-			<ListItem
-				task={task}
-				handleDeleteButton={() => props.handleDeleteButton(task)}
-			/>
+			<li key={task}>
+				<ListItem
+					entry={entry}
+					handleCheckButton={() => props.handleCheckButton(task)}
+					handleDeleteButton={() => props.handleDeleteButton(task)}
+				/>
+			</li>
 		);
 	});
 

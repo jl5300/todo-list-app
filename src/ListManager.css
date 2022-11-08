@@ -17,12 +17,73 @@
 	text-align: center;
 }
 
-.new-task-form input[type="submit"] {
-	background-color: darkslategray;
+.create-task-button {
+	background-color: rgb(62, 113, 113);
 	color: white;
 	cursor: pointer;
-	border: 1px solid black;
+	border: none;
 	border-radius: 5px;
-	padding-top: 3px;
-	margin-bottom: 2px;
+	margin-bottom: 5px;
+	padding: 10px;
+	font-size: medium;
+	display: inline-block;
+	margin-right: 20px;
+	width: 140px;
+}
+
+.create-task-button:hover {
+	background-color: rgb(52, 93, 93);
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-button {
+	background-color: #e4642c;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: medium;
+	display: inline-block;
+	width: 140px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	border-radius: 5px;
+	background-color: #f1f1f1;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	min-width: 80px;
+	width: 100%;
+}
+
+.dropdown-content p {
+	color: black;
+	display: block;
+	padding: 12px;
+	margin: 0;
+	border-radius: 5px;
+	text-align: left;
+	width: 82.5%;
+}
+
+.dropdown-content p:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover, .dropdown-button:hover {
+	cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropdown-button {
+	background-color: #c7592a;
 }
