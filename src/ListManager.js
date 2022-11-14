@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from './TodoList';
 import './ListManager.css';
+import ListItem from './ListItem';
 
 const defaultLabel = `
 	Type new tasks in the space below
@@ -18,6 +18,7 @@ export default class ListManager extends React.Component {
 		};
 
 		this.taskNumber = 0;
+		this.lastSortPressed = '';
 	}
 
 	taskPosInList(task) {
@@ -45,8 +46,8 @@ export default class ListManager extends React.Component {
 		if (this.taskPosInList(currentTask) !== -1) {
 			this.setState({
 				inputLabel: `
-					The task you tried to add is already in
-					the To Do list! Try adding another task.
+				The task you tried to add is already in
+				the To Do list! Try adding another task.
 				`,
 			});
 			return;
@@ -57,11 +58,39 @@ export default class ListManager extends React.Component {
 				task: this.state.currentTask,
 				taskNumber: this.taskNumber,
 				completed: false,
+				priority: 1,
 			}]),
 			currentTask: "",
 			inputLabel: defaultLabel,
 		});
+
 		this.taskNumber++;
+	}
+
+	handleSortButton(property) {
+		if (property === this.lastSortPressed) {
+			this.setState({
+				list: this.state.list.slice().reverse(),
+			});
+		}
+
+		else {
+			this.setState({
+				list: this.state.list.slice().sort((a, b) => {
+					if (a[property] > b[property]) {
+						return 1;
+					}
+
+					if (a[property] < b[property]) {
+						return -1;
+					}
+
+					return 0;
+				}),
+			});
+
+			this.lastSortPressed = property;
+		}
 	}
 
 	handleDeleteButton(task) {
@@ -82,23 +111,35 @@ export default class ListManager extends React.Component {
 		});
 	}
 
-	handleSortButton(property) {
+	handlePriorityButton(task) {
+		let currentList = this.state.list.slice();
+		const taskPos = this.taskPosInList(task);
+
+		currentList[taskPos].priority = (
+			currentList[taskPos].priority + 1
+		) % 3;
+
 		this.setState({
-			list: this.state.list.slice().sort((a, b) => {
-				if (a[property] > b[property]) {
-					return 1;
-				}
-
-				if (a[property] < b[property]) {
-					return -1;
-				}
-
-				return 0;
-			}),
+			list: currentList,
 		});
 	}
 
 	render() {
+		const todoList = this.state.list.map((entry) => {
+			const task = entry.task;
+
+			return (
+				<li key={task}>
+					<ListItem
+						entry={entry}
+						handleCheckButton={() => this.handleCheckButton(task)}
+						handleDeleteButton={() => this.handleDeleteButton(task)}
+						handlePriorityButton={() => this.handlePriorityButton(task)}
+					/>
+				</li>
+			);
+		});
+
 		return (
 			<div className="site-container">
 				<header id="site-header">
@@ -125,17 +166,13 @@ export default class ListManager extends React.Component {
 							<div className="dropdown-content">
 								<p onClick={() => this.handleSortButton('taskNumber')}>Order added</p>
 								<p onClick={() => this.handleSortButton('task')}>Alphabet</p>
-								<p>Priority</p>
+								<p onClick={() => this.handleSortButton('priority')}>Priority</p>
 								<p onClick={() => this.handleSortButton('completed')}>Completion</p>
 							</div>
 						</div>
 					</form>
 				</header>
-				<TodoList
-					list={this.state.list}
-					handleCheckButton={(task) => this.handleCheckButton(task)}
-					handleDeleteButton={(task) => this.handleDeleteButton(task)}
-				/>
+				<ul className="todo-list">{todoList}</ul>
 			</div>
 		);
 	}

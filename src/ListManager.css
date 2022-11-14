@@ -87,3 +87,14 @@
 .dropdown:hover .dropdown-button {
 	background-color: #c7592a;
 }
+
+.todo-list {
+	width: 80%;
+	max-width: 657px;
+	margin: auto;
+	padding: 0;
+}
+
+.todo-list li {
+	list-style-type: none;
+}

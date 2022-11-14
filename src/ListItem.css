@@ -9,11 +9,11 @@
 }
 
 .todo-list .text-fields {
-	width: 82%;
+	width: 73%;
 }
 
 .todo-list .buttons {
-	width: 18%;
+	width: 27%;
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -35,11 +35,18 @@
 	height: auto;
 }
 
+.todo-list .task-desc {
+	height: auto;
+}
+
 .todo-list .task-desc input {
 	border: none;
 	background-color: transparent;
 	margin: 2px 0px;
 	padding: 0px 0px 5px 5px;
+	overflow: hidden scroll;
+	overflow-wrap: break-word;
+	resize: none;
 	width: 98%;
 }
 
@@ -53,16 +60,16 @@
 	width: 35px;
 	height: 35px;
 	cursor: pointer;
+	background-size: 21px;
+	background-color: white;
+	background-repeat: no-repeat;
 }
 
 .todo-list .check-button {
-	background-image: url(../images/check_icon.jpg);
-	background-size: 21px;
-	background-repeat: no-repeat;
-	background-color: white;
+	background-image: url(./images/check_icon.jpg);
 }
 
 .todo-list .delete-button {
-	background-image: url(../images/trash_icon.jpg);
+	background-image: url(./images/trash_icon.jpg);
 	background-size: cover;
 }
