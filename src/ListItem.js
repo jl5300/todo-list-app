@@ -1,14 +1,47 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ListItem.css';
-import l_icon from './images/l_icon.jpg';
-import m_icon from './images/m_icon.jpg';
-import h_icon from './images/h_icon.jpg';
 
 export default function ListItem(props) {
+	const [description, setDescription] = useState('');
+	const textAreaRef = useRef();
+	const textArea = textAreaRef.current;
+
 	const task = props.entry.task;
 	const opacity = props.entry.completed ? 0.2 : 1;
-	const priorityIcons = [h_icon, m_icon, l_icon];
-	const priorityIconShown = priorityIcons[props.entry.priority];
+
+	let priorityButtonLabel = "0";
+	let priorityButtonStyle = {};
+
+	switch(props.entry.priority) {
+		case 0:
+			priorityButtonLabel = "H";
+			priorityButtonStyle.backgroundColor = "#FF4136";
+			break;
+
+		case 1:
+			priorityButtonLabel = "M";
+			priorityButtonStyle.backgroundColor = "#FFDC00";
+			break;
+
+		case 2:
+			priorityButtonLabel = "L";
+			priorityButtonStyle.backgroundColor = "#0074D9";
+			break;
+
+		default:
+			console.log("Invalid priority outside 0-2 range");
+	}
+
+	// Readjust textArea height on description change
+	useEffect(() => {
+		if (textArea) {
+			// Reset height to get correct scrollHeight for textArea
+			textArea.style.height = "0px";
+
+			const scrollHeight = textArea.scrollHeight;
+			textArea.style.height = scrollHeight + "px";
+		}
+	}, [textArea, description]);
 
 	return (
 		<div className="task-container" style={{ opacity: opacity }}>
@@ -18,15 +51,14 @@ export default function ListItem(props) {
 				</div>
 				<hr className="horizontal" />
 				<div className="task-desc">
-					<input
-						type="text"
-						placeholder="Add a description..."
-					/>
-					{/* <textarea
+					<textarea
+						ref={textAreaRef}
 						name="description"
 						placeholder="Add a description..."
+						onChange={(event) => setDescription(event.target.value)}
+						value={description}
 						rows="1"
-					/> */}
+					/>
 				</div>
 			</div>
 			<div className="vertical-line" />
@@ -34,9 +66,11 @@ export default function ListItem(props) {
 				<button
 					title="Set task priority"
 					className="priority-button"
-					style={{ backgroundImage: `url(${priorityIconShown})` }}
+					style={priorityButtonStyle}
 					onClick={() => props.handlePriorityButton()}
-				/>
+				>
+					{priorityButtonLabel}
+				</button>
 				<button
 					title="Mark/unmark task as completed"
 					className="check-button"

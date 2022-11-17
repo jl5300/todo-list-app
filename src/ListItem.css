@@ -20,7 +20,8 @@
 }
 
 .todo-list .task-name {
-	padding: 7px 0px 0px 5px;
+	padding-top: 7px;
+	padding-left: 5px;
 }
 
 .todo-list hr.horizontal {
@@ -35,23 +36,24 @@
 	height: auto;
 }
 
-.todo-list .task-desc {
-	height: auto;
-}
-
-.todo-list .task-desc input {
+.todo-list .task-desc textarea {
 	border: none;
 	background-color: transparent;
-	margin: 2px 0px;
-	padding: 0px 0px 5px 5px;
-	overflow: hidden scroll;
+	margin-bottom: 7px;
+	padding: 0px 5px;
+	overflow: hidden;
 	overflow-wrap: break-word;
 	resize: none;
 	width: 98%;
 }
 
-.todo-list .task-desc input:placeholder-shown {
+.todo-list .task-desc textarea:placeholder-shown {
 	font-style: italic;
+}
+
+.todo-list .task-desc textarea::selection {
+	background: slategray;
+	color: white;
 }
 
 .todo-list button {
@@ -63,6 +65,16 @@
 	background-size: 21px;
 	background-color: white;
 	background-repeat: no-repeat;
+}
+
+.todo-list button:hover {
+	border-color: white;
+}
+
+.todo-list .priority-button {
+	color: #FFFFFF;
+	font-size: x-large;
+	font-weight: bold;
 }
 
 .todo-list .check-button {
