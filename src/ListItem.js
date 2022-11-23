@@ -7,7 +7,6 @@ export default function ListItem(props) {
 	const textArea = textAreaRef.current;
 
 	const task = props.entry.task;
-	const opacity = props.entry.completed ? 0.2 : 1;
 
 	let priorityButtonLabel = "0";
 	let priorityButtonStyle = {};
@@ -38,15 +37,15 @@ export default function ListItem(props) {
 			// Reset height to get correct scrollHeight for textArea
 			textArea.style.height = "0px";
 
-			const scrollHeight = textArea.scrollHeight;
-			textArea.style.height = scrollHeight + "px";
+			// Set height to scrollHeight
+			textArea.style.height = textArea.scrollHeight + "px";
 		}
 	}, [textArea, description]);
 
 	return (
-		<div className="task-container" style={{ opacity: opacity }}>
+		<div className="task-container">
 			<div className="text-fields">
-				<div className="task-name">
+				<div className="task-name" data-testid={`todo-list-task-name-${task}`}>
 					{task}
 				</div>
 				<hr className="horizontal" />
@@ -64,6 +63,7 @@ export default function ListItem(props) {
 			<div className="vertical-line" />
 			<div className="buttons">
 				<button
+					aria-label="priority"
 					title="Set task priority"
 					className="priority-button"
 					style={priorityButtonStyle}
@@ -72,7 +72,7 @@ export default function ListItem(props) {
 					{priorityButtonLabel}
 				</button>
 				<button
-					title="Mark/unmark task as completed"
+					title="Mark/unmark task as complete"
 					className="check-button"
 					onClick={() => props.handleCheckButton()}
 				/>

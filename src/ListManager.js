@@ -3,9 +3,7 @@ import './ListManager.css';
 import ListItem from './ListItem';
 
 const defaultLabel = `
-	Type new tasks in the space below
-	and click the button or press Enter
-	to add them to the list.
+	Type new tasks in the space below.
 `;
 
 export default class ListManager extends React.Component {
@@ -18,7 +16,7 @@ export default class ListManager extends React.Component {
 		};
 
 		this.taskNumber = 0;
-		this.ascendingSort = true;
+		this.sortAscending = true;
 		this.lastSortPressed = '';
 	}
 
@@ -70,11 +68,11 @@ export default class ListManager extends React.Component {
 
 	handleSortButton(property) {
 		if (property === this.lastSortPressed) {
-			this.ascendingSort = !this.ascendingSort;
+			this.sortAscending = !this.sortAscending;
 		}
 
 		else {
-			this.ascendingSort = true;
+			this.sortAscending = true;
 			this.lastSortPressed = property;
 		}
 
@@ -84,7 +82,7 @@ export default class ListManager extends React.Component {
 					return 0;
 				}
 
-				if (this.ascendingSort) {
+				if (this.sortAscending) {
 					if (a[property] < b[property]) {
 						return -1;
 					}
@@ -140,9 +138,10 @@ export default class ListManager extends React.Component {
 	render() {
 		const todoList = this.state.list.map((entry) => {
 			const task = entry.task;
+			const opacity = entry.completed ? 0.2 : 1;
 
 			return (
-				<li key={task}>
+				<li key={task} aria-label={task} style={{ opacity: opacity }}>
 					<ListItem
 						entry={entry}
 						handleCheckButton={() => this.handleCheckButton(task)}
@@ -161,22 +160,23 @@ export default class ListManager extends React.Component {
 						className="new-task-form"
 						onSubmit={(e) => this.handleSubmit(e)}
 					>
-						<label>
+						<label htmlFor="task-input">
 							{this.state.inputLabel}
 						</label>
 						<input
 							type="text"
+							id="task-input"
 							onChange={(e) => this.handleChange(e)}
 							value={this.state.currentTask}
 						/>
 						<input
-							className="create-task-button"
 							type="submit"
 							value="Create new task"
+							className="create-task-button"
 						/>
 						<div className="dropdown">
 							<button className="dropdown-button">Sort tasks by:</button>
-							<div className="dropdown-content">
+							<div className="dropdown-content" aria-label="dropdown" role='list'>
 								<p
 									id="first-in-list"
 									onClick={() => this.handleSortButton('taskNumber')}
@@ -195,7 +195,7 @@ export default class ListManager extends React.Component {
 						</div>
 					</form>
 				</header>
-				<ul className="todo-list">{todoList}</ul>
+				<ul className="todo-list" aria-label="todo">{todoList}</ul>
 			</div>
 		);
 	}
