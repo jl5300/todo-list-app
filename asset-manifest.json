@@ -6,9 +6,9 @@
   "static/js/1.3e7cde13.chunk.js.map": "/todo-list/static/js/1.3e7cde13.chunk.js.map",
   "runtime~main.js": "/todo-list/static/js/runtime~main.6f47f260.js",
   "runtime~main.js.map": "/todo-list/static/js/runtime~main.6f47f260.js.map",
-  "static/media/ListItem.css": "/todo-list/static/media/trash_icon.9177df39.jpg",
+  "static/media/ListItem.css": "/todo-list/static/media/check_icon.2582aef8.jpg",
   "static/css/main.1ac085e6.chunk.css.map": "/todo-list/static/css/main.1ac085e6.chunk.css.map",
   "index.html": "/todo-list/index.html",
-  "precache-manifest.029cdd3bf052cf1cd7cf0c1803ce02d7.js": "/todo-list/precache-manifest.029cdd3bf052cf1cd7cf0c1803ce02d7.js",
+  "precache-manifest.d01b4ed64d66bb6a7bfc641a8c24496f.js": "/todo-list/precache-manifest.d01b4ed64d66bb6a7bfc641a8c24496f.js",
   "service-worker.js": "/todo-list/service-worker.js"
 }
