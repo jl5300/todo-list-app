@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from './App';
@@ -86,7 +86,6 @@ describe('Sorting', () => {
 		const taskInput = setupAndReturnTaskInput();
 		const sortOptionsList = screen.getByRole('list', { name: 'dropdown' });
 		const orderAddedSortButton = within(sortOptionsList).getByText(/order/i);
-		const alphabetSortButton = within(sortOptionsList).getByText(/alphabet/i);
 
 		for (let name of ['c', 'a', 'b',]) {
 			addItemToList(taskInput, name);
